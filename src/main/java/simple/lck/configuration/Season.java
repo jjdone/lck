@@ -1,2 +1,5 @@
-package simple.lck.domain;public enum Season {
+package simple.lck.configuration;
+
+public enum Season {
+    SPRING, SUMMER
 }
