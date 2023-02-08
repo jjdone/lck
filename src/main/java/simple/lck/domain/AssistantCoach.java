@@ -15,8 +15,9 @@ public class AssistantCoach {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
-    @Column(name = "team_id")
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
+    @Column(nullable = false)
     private String name;
 }

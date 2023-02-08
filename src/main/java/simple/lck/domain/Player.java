@@ -25,7 +25,7 @@ public class Player {
     private Position position;
 
     @ManyToOne(fetch = LAZY)
-    @Column(name = "team_id")
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
     private String detailUrl;

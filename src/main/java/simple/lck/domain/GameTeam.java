@@ -15,27 +15,27 @@ public class GameTeam {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
-    @Column(name = "geme_id")
+    @JoinColumn(name = "geme_id")
     private Game game;
 
     @ManyToOne(fetch = LAZY)
-    @Column(name = "team_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     @ManyToOne(fetch = LAZY)
-    private Player topPlayer;
+    private Player top;
 
     @ManyToOne(fetch = LAZY)
-    private Player jglPlayer;
+    private Player jgl;
 
     @ManyToOne(fetch = LAZY)
-    private Player midPlayer;
+    private Player mid;
 
     @ManyToOne(fetch = LAZY)
-    private Player botPlayer;
+    private Player bot;
 
     @ManyToOne(fetch = LAZY)
-    private Player sptPlayer;
+    private Player spt;
 
     private int point;
 }
