@@ -29,9 +29,10 @@ public class PlayerService {
     }
 
     @Transactional
-    public void deletePlayer(Player player) {
+    public Long deletePlayer(Player player) {
         validateNonexistentPlayer(player);
         playerRepository.delete(player);
+        return player.getId();
     }
 
     private void validateNonexistentPlayer(Player player) {
