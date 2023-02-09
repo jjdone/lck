@@ -15,7 +15,7 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
 
     @Transactional
-    public Long registration(Player player) {
+    public Long addPlayer(Player player) {
         validateDuplicatePlayer(player);
         playerRepository.save(player);
         return player.getId();
@@ -29,7 +29,7 @@ public class PlayerService {
     }
 
     @Transactional
-    public void delete(Player player) {
+    public void deletePlayer(Player player) {
         validateNonexistentPlayer(player);
         playerRepository.delete(player);
     }
@@ -39,13 +39,5 @@ public class PlayerService {
         if (findPlayers.isEmpty()) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
-    }
-
-    public List<Player> findPlayers() {
-        return playerRepository.findAll();
-    }
-
-    public Player findOne(Long playerId) {
-        return playerRepository.findById(playerId).get();
     }
 }
