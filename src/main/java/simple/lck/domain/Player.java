@@ -1,6 +1,8 @@
 package simple.lck.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import simple.lck.configuration.Position;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Player {
 
     @Id @GeneratedValue
@@ -25,8 +28,17 @@ public class Player {
     private Position position;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "team_id", nullable = false)
+    @JoinColumn(name = "team_id")
     private Team team;
 
     private String detailUrl;
+
+    @Builder
+    public Player(String name, String nickname, Position position, Team team, String detailUrl) {
+        this.name = name;
+        this.nickname = nickname;
+        this.position = position;
+        this.team = team;
+        this.detailUrl = detailUrl;
+    }
 }
