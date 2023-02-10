@@ -13,9 +13,11 @@ import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
+import static simple.lck.configuration.Position.*;
 
 @Transactional
 @SpringBootTest
@@ -44,7 +46,7 @@ class PlayerServiceTest {
         player = Player.builder()
                 .name("Lee")
                 .nickname("Faker")
-                .position(Position.MID)
+                .position(MID)
                 .team(team)
                 .detailUrl("https")
                 .build();
@@ -70,5 +72,35 @@ class PlayerServiceTest {
         Long deleteId = playerService.deletePlayer(findPlayer);
         //then
         assertThat(playerRepository.findById(deleteId)).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    public void findOneTest() throws Exception {
+        //given
+        Long saveId = playerService.addPlayer(player);
+        Player savePlayer = playerRepository.findById(saveId).get();
+        //when
+        Player findPlayer = playerService.findOne(saveId);
+        //then
+        assertThat(findPlayer).isEqualTo(savePlayer);
+    }
+
+    @Test
+    public void findPlayersOfTeamTest() throws Exception {
+        //given
+        Player player2 = Player.builder()
+                .name("Choi")
+                .nickname("Zeus")
+                .position(TOP)
+                .team(team)
+                .detailUrl("https")
+                .build();
+        playerService.addPlayer(player);
+        playerService.addPlayer(player2);
+        Long teamId = team.getId();
+        //when
+        List<Player> findPlayers = playerService.findPlayersOfTeam(teamId);
+        //then
+        assertThat(findPlayers.size()).isEqualTo(2);
     }
 }
