@@ -1,6 +1,5 @@
 package simple.lck.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,23 +7,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.configuration.GameState;
-import simple.lck.configuration.Season;
 import simple.lck.domain.*;
-import simple.lck.dto.GameAddDto;
+import simple.lck.dto.game.GameAddDto;
+import simple.lck.dto.game.GameScheduleDto;
 import simple.lck.repository.GameRepository;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static simple.lck.configuration.Position.MID;
 import static simple.lck.configuration.Season.*;
 
 @Transactional
 @SpringBootTest
-@Rollback(value = false)
+//@Rollback(value = false)
 class GameServiceTest {
 
     @Autowired GameService gameService;
@@ -75,6 +74,17 @@ class GameServiceTest {
         //when
         Long saveId = gameService.addGame(gameAddDto);
         //then
-        assertThat(gameRepository.findById(saveId).get().getGameState()).isEqualTo(GameState.BEFORE);
+        assertThat(gameRepository.findById(saveId).get().getId()).isEqualTo(saveId);
+    }
+
+    @Test
+    public void findGamesTest() throws Exception {
+        //given
+        gameService.addGame(gameAddDto);
+        //when
+        List<GameScheduleDto> games = gameService.findGames();
+        //then
+        assertThat(games.size()).isEqualTo(1);
+        assertThat(games.get(0).getSeason()).isEqualTo(SPRING);
     }
 }

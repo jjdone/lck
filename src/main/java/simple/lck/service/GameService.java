@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.Date;
 import simple.lck.domain.Game;
 import simple.lck.domain.GameTeam;
-import simple.lck.dto.GameAddDto;
-import simple.lck.dto.GameListDto;
-import simple.lck.dto.GameScheduleDto;
+import simple.lck.dto.game.GameAddDto;
+import simple.lck.dto.game.GameListDto;
+import simple.lck.dto.game.GameScheduleDto;
 import simple.lck.repository.GameRepository;
 
 import javax.persistence.EntityManager;
@@ -59,14 +59,20 @@ public class GameService {
     }
 
     // 게임 일정 조회
+    @Transactional
     public List<GameScheduleDto> findGames() {
-        String query = "select g.id, g.gameState, d.round, d.season, t.team, t.point " +
-                "from Game g join Date d join GameTeam t";
+        String query = "select new simple.lck.dto.game.GameListDto(g.id, g.gameState, d.round, d.season, t.team, t.point) " +
+                "from GameTeam t join t.game g join g.date d ";
         List<GameListDto> resultList = em.createQuery(query, GameListDto.class).getResultList();
         List<GameScheduleDto> gameList = new ArrayList<>();
+
+        for (Object res : resultList) {
+            System.out.println("res = " + res);
+        }
+
         for (int i = 0; i < resultList.size(); i += 2) {
             GameScheduleDto gameScheduleDto = GameScheduleDto.builder()
-                    .game_id(resultList.get(i).getGame_id())
+                    .game_id(resultList.get(i).getId())
                     .gameState(resultList.get(i).getGameState())
                     .round(resultList.get(i).getRound())
                     .season(resultList.get(i).getSeason())
