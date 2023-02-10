@@ -63,4 +63,9 @@ public class TeamService {
     public List<Team> findTeams() {
         return teamRepository.findAll();
     }
+
+    // Team 상세
+    public Team findOne(Long teamId) {
+        return teamRepository.findById(teamId).get();
+    }
 }

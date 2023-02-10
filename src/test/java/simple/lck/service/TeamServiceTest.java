@@ -87,4 +87,15 @@ class TeamServiceTest {
         //then
         assertThat(teams.size()).isEqualTo(1);
     }
+
+    @Test
+    public void findOneTest() throws Exception {
+        //given
+        Long saveId = teamService.addTeam(team, assistantCoachNames);
+        Team saveTeam = teamRepository.findById(saveId).get();
+        //when
+        Team findTeam = teamService.findOne(saveId);
+        //then
+        assertThat(findTeam).isEqualTo(saveTeam);
+    }
 }
