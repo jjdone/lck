@@ -72,6 +72,7 @@ public class TeamService {
     }
 
     // 팀의 어시 코치 찾기
+    @Transactional
     public List<AssistantCoach> findAssistantCoaches(Long teamId) {
         String query = "select a from AssistantCoach a where a.team.id = :teamId";
         return em.createQuery(query, AssistantCoach.class)

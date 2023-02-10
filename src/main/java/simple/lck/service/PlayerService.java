@@ -53,6 +53,7 @@ public class PlayerService {
 
 
     // 특정 팀의 선수 목록 조회
+    @Transactional
     public List<Player> findPlayersOfTeam(Long teamId) {
         String query = "select p from Player p where p.team.id = :teamId";
         return em.createQuery(query, Player.class)
