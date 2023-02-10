@@ -8,6 +8,7 @@ import simple.lck.domain.Team;
 import simple.lck.dto.TeamUpdateScoreDto;
 import simple.lck.repository.TeamRepository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -15,6 +16,7 @@ import java.util.List;
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final EntityManager em;
 
     //Team 등록
     @Transactional
@@ -64,8 +66,16 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
-    // Team 상세
+    // Team 검색
     public Team findOne(Long teamId) {
         return teamRepository.findById(teamId).get();
+    }
+
+    // 팀의 어시 코치 찾기
+    public List<AssistantCoach> findAssistantCoaches(Long teamId) {
+        String query = "select a from AssistantCoach a where a.team.id = :teamId";
+        return em.createQuery(query, AssistantCoach.class)
+                .setParameter("teamId", teamId)
+                .getResultList();
     }
 }
