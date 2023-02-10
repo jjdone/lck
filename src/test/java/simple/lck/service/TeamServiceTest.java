@@ -4,11 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.AssistantCoach;
 import simple.lck.domain.Team;
-import simple.lck.dto.TeamUpdateScoreDto;
+import simple.lck.dto.team.TeamUpdateScoreDto;
 import simple.lck.repository.TeamRepository;
 
 import java.util.Arrays;

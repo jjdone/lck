@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import simple.lck.dto.TeamUpdateScoreDto;
+import simple.lck.dto.team.TeamUpdateScoreDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;

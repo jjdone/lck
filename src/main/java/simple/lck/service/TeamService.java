@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.AssistantCoach;
 import simple.lck.domain.Team;
-import simple.lck.dto.TeamUpdateScoreDto;
+import simple.lck.dto.team.TeamUpdateScoreDto;
 import simple.lck.repository.TeamRepository;
 
 import javax.persistence.EntityManager;

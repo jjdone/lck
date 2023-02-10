@@ -1,4 +1,4 @@
-package simple.lck.dto;
+package simple.lck.dto.team;
 
 import lombok.Data;
 
