@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import simple.lck.domain.AssistantCoach;
 import simple.lck.domain.Team;
 import simple.lck.dto.TeamUpdateScoreDto;
 import simple.lck.repository.TeamRepository;
@@ -97,5 +98,18 @@ class TeamServiceTest {
         Team findTeam = teamService.findOne(saveId);
         //then
         assertThat(findTeam).isEqualTo(saveTeam);
+    }
+
+    @Test
+    public void 특정_팀_어시_찾기_Test() throws Exception {
+        //given
+        Long saveId = teamService.addTeam(team, assistantCoachNames);
+        //when
+        List<AssistantCoach> assistantCoaches = teamService.findAssistantCoaches(saveId);
+        //then
+        System.out.println(assistantCoaches.size());
+        assertThat(assistantCoaches.get(0).getName()).isEqualTo(assistantCoachNames.get(0));
+        assertThat(assistantCoaches.get(1).getName()).isEqualTo(assistantCoachNames.get(1));
+
     }
 }
