@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.Player;
 import simple.lck.repository.PlayerRepository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -13,7 +14,9 @@ import java.util.List;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final EntityManager em;
 
+    // 선수 등록
     @Transactional
     public Long addPlayer(Player player) {
         validateDuplicatePlayer(player);
@@ -28,6 +31,7 @@ public class PlayerService {
         }
     }
 
+    // 선수 삭제
     @Transactional
     public Long deletePlayer(Player player) {
         validateNonexistentPlayer(player);
@@ -40,5 +44,19 @@ public class PlayerService {
         if (findPlayers.isEmpty()) {
             throw new IllegalStateException("존재하지 않는 회원입니다.");
         }
+    }
+
+    // 선수 상세 조회
+    public Player findOne(Long playerId) {
+        return playerRepository.findById(playerId).get();
+    }
+
+
+    // 특정 팀의 선수 목록 조회
+    public List<Player> findPlayersOfTeam(Long teamId) {
+        String query = "select p from Player p where p.team.id = :teamId";
+        return em.createQuery(query, Player.class)
+                .setParameter("teamId", teamId)
+                .getResultList();
     }
 }
