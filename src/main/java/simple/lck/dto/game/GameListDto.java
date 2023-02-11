@@ -8,7 +8,6 @@ import simple.lck.configuration.Season;
 import simple.lck.domain.Team;
 
 @Data
-@AllArgsConstructor
 @Builder
 public class GameListDto {
 
