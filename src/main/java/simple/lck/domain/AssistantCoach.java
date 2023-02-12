@@ -30,7 +30,7 @@ public class AssistantCoach {
     public static List<AssistantCoach> createAssistantCoach(List<String> assistantCoachNames) {
         List<AssistantCoach> assistantCoaches = new ArrayList<>();
         for (String assistantCoachName : assistantCoachNames) {
-            if (assistantCoachName != null) {
+            if (assistantCoachName != "" && assistantCoachName != null) {
                 AssistantCoach assistantCoach = new AssistantCoach();
                 assistantCoach.setName(assistantCoachName);
                 assistantCoaches.add(assistantCoach);
