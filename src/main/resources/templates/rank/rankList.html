@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Team Rank</title>
 </head>
 <body>
-$END$
+
+<h1>Team Rank</h1>
+
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Team Name</th>
+        <th>Won</th>
+        <th>Lost</th>
+        <th>Score</th>
+    </tr>
+    <tr th:each="team, iterStat : ${rank}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${team.name}"></td>
+        <td th:text="${team.won}"></td>
+        <td th:text="${team.lost}"></td>
+        <td th:text="${team.score}"></td>
+    </tr>
+</table>
+
 </body>
 </html>
