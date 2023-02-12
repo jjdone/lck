@@ -47,4 +47,16 @@ public class Game {
 
         return game;
     }
+
+    public void updatePoint(Team team1, int point1, Team team2, int point2, GameState gameState) {
+        this.gameState = gameState;
+
+        if (gameTeams.get(0).getTeam().equals(team1)) {
+            gameTeams.get(0).setPoint(point1);
+            gameTeams.get(1).setPoint(point2);
+            return;
+        }
+        gameTeams.get(0).setPoint(point2);
+        gameTeams.get(1).setPoint(point1);
+    }
 }
