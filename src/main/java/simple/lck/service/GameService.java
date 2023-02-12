@@ -3,12 +3,11 @@ package simple.lck.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import simple.lck.configuration.GameState;
 import simple.lck.domain.Date;
 import simple.lck.domain.Game;
 import simple.lck.domain.GameTeam;
-import simple.lck.dto.game.GameAddDto;
-import simple.lck.dto.game.GameListDto;
-import simple.lck.dto.game.GameScheduleDto;
+import simple.lck.dto.game.*;
 import simple.lck.repository.GameRepository;
 
 import javax.persistence.EntityManager;
@@ -85,5 +84,36 @@ public class GameService {
         }
 
         return gameList;
+    }
+
+    // 경기를 업데이트할 정보 가져오기
+    @Transactional
+    public GameTeamUpdateDto findGameTeams(Long gameId) {
+        String query1 = "select new simple.lck.dto.game.GameTeamDto(t.team, t.point) " +
+                "from GameTeam t where t.game.id = :gameId";
+        List<GameTeamDto> findDto = em.createQuery(query1, GameTeamDto.class)
+                .setParameter("gameId", gameId)
+                .getResultList();
+
+        GameState findGameState = gameRepository.findById(gameId).get().getGameState();
+
+        GameTeamDto team1 = findDto.get(0);
+        GameTeamDto team2 = findDto.get(1);
+
+        return GameTeamUpdateDto.builder()
+                .team1(team1.getTeam())
+                .point1(team1.getPoint())
+                .team2(team2.getTeam())
+                .point2(team2.getPoint())
+                .gameState(findGameState)
+                .build();
+    }
+
+    @Transactional
+    public void updateGameTeam(Long gameId, GameTeamUpdateDto gameTeamUpdateDto) {
+        Game findGame = gameRepository.findById(gameId).get();
+        findGame.updatePoint(gameTeamUpdateDto.getTeam1(), gameTeamUpdateDto.getPoint1(),
+                gameTeamUpdateDto.getTeam2(), gameTeamUpdateDto.getPoint2(),
+                gameTeamUpdateDto.getGameState());
     }
 }
