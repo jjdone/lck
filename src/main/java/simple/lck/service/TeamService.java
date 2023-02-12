@@ -48,7 +48,8 @@ public class TeamService {
 
     // Team 삭제
     @Transactional
-    public Long deleteTeam(Team team) {
+    public Long deleteTeam(Long teamId) {
+        Team team = teamRepository.findById(teamId).get();
         validateNonexistentTeam(team);
         teamRepository.delete(team);
         return team.getId();
@@ -83,7 +84,7 @@ public class TeamService {
     // 팀 정규 순위 리스트
     @Transactional
     public List<Team> findTeamRank() {
-        String query = "select t from Team t order by t.score";
+        String query = "select t from Team t order by t.score desc";
         return em.createQuery(query, Team.class)
                 .getResultList();
     }
