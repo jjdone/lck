@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Main</title>
 </head>
 <body>
-$END$
+<h1>Main</h1>
+<hr>
+<div>
+    <button onclick="window.location.href='/rank'">Rank</button>
+</div>
+<div>
+    <button onclick="window.location.href='/teams/addTeamForm'">Add Team</button>
+    <button onclick="window.location.href='/teams'">Team List</button>
+</div>
+<div>
+    <button onclick="window.location.href='/players/addPlayerForm'">Add Player</button>
+    <button onclick="window.location.href='/players'">Player List</button>
+</div>
+<div>
+    <button onclick="window.location.href='/games/addGameForm'">Add Game</button>
+    <button onclick="window.location.href='/games'">Game List</button>
+</div>
 </body>
 </html>
