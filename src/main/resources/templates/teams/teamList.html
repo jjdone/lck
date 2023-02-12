@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Team List</title>
 </head>
 <body>
-$END$
+
+<h1>Team List</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Head Coach</th>
+        <th>Won</th>
+        <th>Lost</th>
+        <th>Score</th>
+        <th>Detail URL</th>
+    </tr>
+    <tr th:each="team : ${teams}">
+        <td th:text="${team.name}"></td>
+        <td th:text="${team.headCoach}"></td>
+        <td th:text="${team.won}"></td>
+        <td th:text="${team.lost}"></td>
+        <td th:text="${team.score}"></td>
+        <td th:text="${team.detailUrl}"></td>
+    </tr>
+</table>
+
 </body>
 </html>

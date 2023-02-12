@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Update Team Score</title>
 </head>
 <body>
-$END$
+
+<h1>Update Team Score</h1>
+
+<form action="#" th:action th:object="${form}" method="post">
+    <div>
+        <label>Won:</label>
+        <input type="text" th:field="*{won}"/>
+    </div>
+    <div>
+        <label>Lost:</label>
+        <input type="text" th:field="*{lost}"/>
+    </div>
+    <div>
+        <label>Score:</label>
+        <input type="text" th:field="*{score}"/>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
 </body>
 </html>

@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Add Team Form</title>
 </head>
 <body>
-$END$
+<h1>Add Team Form</h1>
+<form action="#" th:action th:object="${form}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    </div>
+    <div>
+        <label for="headCoach">Head Coach:</label>
+        <input type="text" id="headCoach" th:field="*{headCoach}" />
+    </div>
+    <div>
+        <label for="won">Won:</label>
+        <input type="text" id="won" th:field="*{won}" />
+    </div>
+    <div>
+        <label for="lost">Lost:</label>
+        <input type="text" id="lost" th:field="*{lost}"/>
+    </div>
+    <div>
+        <label for="score">Score:</label>
+        <input type="text" id="score" th:field="*{score}" />
+    </div>
+    <div>
+        <label for="detailUrl">Detail URL:</label>
+        <input type="text" id="detailUrl" th:field="*{detailUrl}" />
+    </div>
+    <div>
+        <label for="assistantCoach1">Assistant Coach 1:</label>
+        <input type="text" id="assistantCoach1" th:field="*{assistantCoach1}" />
+    </div>
+    <div>
+        <label for="assistantCoach2">Assistant Coach 2:</label>
+        <input type="text" id="assistantCoach2" th:field="*{assistantCoach2}" />
+    </div>
+    <div>
+        <label for="assistantCoach3">Assistant Coach 3:</label>
+        <input type="text" id="assistantCoach3" th:field="*{assistantCoach3}" />
+    </div>
+    <button type="submit">Add Team</button>
+</form>
 </body>
 </html>
