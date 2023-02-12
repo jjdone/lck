@@ -10,10 +10,12 @@ import simple.lck.configuration.GameState;
 import simple.lck.domain.*;
 import simple.lck.dto.game.GameAddDto;
 import simple.lck.dto.game.GameScheduleDto;
+import simple.lck.dto.game.GameTeamUpdateDto;
 import simple.lck.repository.GameRepository;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,6 +32,7 @@ class GameServiceTest {
     @Autowired GameRepository gameRepository;
     @Autowired TeamRepository teamRepository;
     @Autowired PlayerRepository playerRepository;
+    @Autowired EntityManager em;
 
     private GameAddDto gameAddDto;
 
@@ -86,5 +89,40 @@ class GameServiceTest {
         //then
         assertThat(games.size()).isEqualTo(1);
         assertThat(games.get(0).getSeason()).isEqualTo(SPRING);
+    }
+
+    @Test
+    public void findGameTeamsTest() throws Exception {
+        //given
+        Long saveId = gameService.addGame(gameAddDto);
+        //when
+        GameTeamUpdateDto findGameTeams = gameService.findGameTeams(saveId);
+        //then
+        assertThat(findGameTeams.getTeam1().getName()).isEqualTo("T1");
+        assertThat(findGameTeams.getTeam2().getName()).isEqualTo("T1");
+        assertThat(findGameTeams.getPoint1()).isEqualTo(0);
+        assertThat(findGameTeams.getPoint2()).isEqualTo(0);
+        assertThat(findGameTeams.getGameState()).isEqualTo(null);
+    }
+
+    @Test
+    public void updateGameTeamTest() throws Exception {
+        //given
+        Long saveId = gameService.addGame(gameAddDto);
+        GameTeamUpdateDto findSavedGameTeams = gameService.findGameTeams(saveId);
+        //when
+        GameTeamUpdateDto gameTeamUpdateDto = GameTeamUpdateDto.builder()
+                .gameState(GameState.PLAYING)
+                .team1(findSavedGameTeams.getTeam1())
+                .point1(1)
+                .team2(findSavedGameTeams.getTeam2())
+                .point2(2)
+                .build();
+        gameService.updateGameTeam(saveId, gameTeamUpdateDto);
+        //then
+        GameTeamUpdateDto findGameTeams = gameService.findGameTeams(saveId);
+        assertThat(gameTeamUpdateDto.getGameState()).isEqualTo(findGameTeams.getGameState());
+        assertThat(gameTeamUpdateDto.getPoint1()).isEqualTo(findGameTeams.getPoint1());
+        assertThat(gameTeamUpdateDto.getPoint2()).isEqualTo(findGameTeams.getPoint2());
     }
 }
