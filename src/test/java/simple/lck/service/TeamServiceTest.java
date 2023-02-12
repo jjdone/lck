@@ -111,4 +111,26 @@ class TeamServiceTest {
         assertThat(assistantCoaches.get(1).getName()).isEqualTo(assistantCoachNames.get(1));
 
     }
+
+    @Test
+    public void findTeamRankTest() throws Exception {
+        //given
+        Team team2 = Team.builder()
+                .name("T2")
+                .headCoach("배성웅")
+                .won(0)
+                .lost(0)
+                .score(2)
+                .detailUrl("http")
+                .build();
+        List<String> assistantCoachNames2 = Arrays.asList("coach1", "coach2", null);
+        Long saveId1 = teamService.addTeam(team, assistantCoachNames);
+        Long saveId2 = teamService.addTeam(team2, assistantCoachNames2);
+        //when
+        List<Team> findTeamRank = teamService.findTeamRank();
+        //then
+        assertThat(findTeamRank.size()).isEqualTo(2);
+        assertThat(findTeamRank.get(0).getName()).isEqualTo("T1");
+        assertThat(findTeamRank.get(1).getName()).isEqualTo("T2");
+    }
 }
