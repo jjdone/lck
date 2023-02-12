@@ -79,4 +79,12 @@ public class TeamService {
                 .setParameter("teamId", teamId)
                 .getResultList();
     }
+
+    // 팀 정규 순위 리스트
+    @Transactional
+    public List<Team> findTeamRank() {
+        String query = "select t from Team t order by t.score";
+        return em.createQuery(query, Team.class)
+                .getResultList();
+    }
 }
