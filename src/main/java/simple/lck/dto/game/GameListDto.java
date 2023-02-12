@@ -9,6 +9,7 @@ import simple.lck.domain.Team;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class GameListDto {
 
     private Long id;
