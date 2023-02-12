@@ -55,10 +55,11 @@ class TeamServiceTest {
     public void updateScoreTest() throws Exception {
         //given
         Long saveId = teamService.addTeam(team, assistantCoachNames);
-        TeamUpdateScoreDto teamUpdateScoreDto = new TeamUpdateScoreDto();
-        teamUpdateScoreDto.setWon(2); // 2:0, 2:1
-        teamUpdateScoreDto.setLost(1); // 1:2
-        teamUpdateScoreDto.setScore(2);
+        TeamUpdateScoreDto teamUpdateScoreDto = TeamUpdateScoreDto.builder()
+                .won(2)
+                .lost(1)
+                .score(2)
+                .build();
         //when
         Long updateId = teamService.updateScore(saveId, teamUpdateScoreDto);
         //then
@@ -73,7 +74,7 @@ class TeamServiceTest {
         Long saveId = teamService.addTeam(team, assistantCoachNames);
         Team findTeam = teamRepository.findById(saveId).get();
         //when
-        Long deleteId = teamService.deleteTeam(findTeam);
+        Long deleteId = teamService.deleteTeam(findTeam.getId());
         //then
         assertThat(teamRepository.findById(deleteId)).isEqualTo(Optional.empty());
     }
