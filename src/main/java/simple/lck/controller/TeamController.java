@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import simple.lck.domain.AssistantCoach;
+import simple.lck.domain.Player;
 import simple.lck.domain.Team;
 import simple.lck.dto.team.TeamAddDto;
 import simple.lck.dto.team.TeamUpdateScoreDto;
+import simple.lck.service.PlayerService;
 import simple.lck.service.TeamService;
 
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import java.util.List;
 public class TeamController {
 
     private final TeamService teamService;
+    private final PlayerService playerService;
 
     @GetMapping("/addTeamForm")
     public String addTeamFrom(Model model) {
@@ -88,5 +91,12 @@ public class TeamController {
                               @ModelAttribute TeamUpdateScoreDto teamUpdateScoreDto) {
         teamService.updateScore(teamId, teamUpdateScoreDto);
         return "redirect:/admin/teams/{teamId}";
+    }
+
+    @GetMapping("/{teamId}/players")
+    public String players(@PathVariable Long teamId, Model model) {
+        List<Player> players = playerService.findPlayersOfTeam(teamId);
+        model.addAttribute("players", players);
+        return "admin/teams/players";
     }
 }
