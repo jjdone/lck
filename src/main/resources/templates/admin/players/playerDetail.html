@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Player Detail</title>
 </head>
 <body>
-$END$
+<header>
+    <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Player Detail</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <td th:text="${player.id}"></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td th:text="${player.name}"></td>
+    </tr>
+    <tr>
+        <th>Nickname</th>
+        <td th:text="${player.nickname}"></td>
+    </tr>
+    <tr>
+        <th>Position</th>
+        <td th:text="${player.position}"></td>
+    </tr>
+    <tr>
+        <th>Team</th>
+        <td> <a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}">팀 이름</a></td>
+    </tr>
+    <tr>
+        <th>Detail URL</th>
+        <td><a th:href="${player.detailUrl}" th:text="Details"></a></td>
+    </tr>
+</table>
+
+<div>
+    <button th:onclick="|location.href='@{/admin/players}'|">Player List</button>
+    <button th:onclick="|location.href='@{/admin/players/{playerId}/delete(playerId=${player.id})}'|">Delete Player</button>
+</div>
 </body>
 </html>
