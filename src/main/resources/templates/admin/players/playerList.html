@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Player List</title>
 </head>
@@ -18,12 +18,13 @@
     <th>Nickname</th>
     <th>Position</th>
     <th>Team</th>
+    <th>Detail URL</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="player : ${players}">
     <td><a th:href="@{/admin/players/{playerId}(playerId=${player.id})}" th:text="${player.name}">선수 이름</a></td>
-    <td th:text="${player.nickname}">선수 닉네임</td>
+    <td><a th:href="@{/admin/players/{playerId}(playerId=${player.id})}" th:text="${player.nickname}">선수 닉네임</a></td>
     <td th:text="${player.position}">포지션</td>
     <td> <a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}">팀 이름</a></td>
     <td><a th:href="${player.detailUrl}" th:target="_blank" th:text="Details"></a></td>

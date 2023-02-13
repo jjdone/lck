@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Team Detail</title>
 </head>
 <body>
-
 <header>
     <a th:href="@{/admin/main}">Main</a>
 </header>
@@ -18,7 +17,7 @@
     <p>Won: <span th:text="${team.won}"></span></p>
     <p>Lost: <span th:text="${team.lost}"></span></p>
     <p>Score: <span th:text="${team.score}"></span></p>
-    <p>Detail URL: <a th:href="${team.detailUrl}" th:target="_blank">나무위키</a></p>
+    <p>Detail URL: <a th:href="${team.detailUrl}" th:target="_blank" th:text="Details">나무위키</a></p>
 </div>
 
 <h2>Assistant Coaches</h2>
@@ -31,6 +30,10 @@
         <td th:text="${assistantCoach.name}"></td>
     </tr>
 </table>
+<hr>
+<div>
+    <button th:onclick="|location.href='@{/admin/teams/{teamId}/players(teamId=${team.id})}'|">Team's Player List</button>
+</div>
 <hr>
 <div>
     <button th:onclick="|location.href='@{/admin/teams/{teamId}/updateScore(teamId=${team.id})}'|">Update Score</button>

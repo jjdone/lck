@@ -28,7 +28,7 @@
         <td th:text="${team.won}">승 수</td>
         <td th:text="${team.lost}">패 수</td>
         <td th:text="${team.score}">득점</td>
-        <td th:text="${team.detailUrl}">나무위키</td>
+        <td><a th:href="${team.detailUrl}" th:target="_blank" th:text="Details">나무위키</a></td>
     </tr>
 </table>
 
