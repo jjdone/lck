@@ -15,10 +15,10 @@ public class RankController {
 
     private final TeamService teamService;
 
-    @GetMapping("/rank")
+    @GetMapping("/admin/rank")
     public String rankList(Model model) {
         List<Team> rank = teamService.findTeamRank();
         model.addAttribute("rank", rank);
-        return "rank/rankList";
+        return "admin/rank/rankList";
     }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <a href="/">Main</a>
+    <a th:href="@{/admin/main}">Main</a>
 </header>
 
 <h1>Add Team Form</h1>
@@ -52,7 +52,7 @@
 </form>
 <hr>
 <div>
-    <button th:onclick="|location.href='@{/teams}'|">Team List</button>
+    <button th:onclick="|location.href='@{/admin/teams}'|">Team List</button>
 </div>
 
 </body>

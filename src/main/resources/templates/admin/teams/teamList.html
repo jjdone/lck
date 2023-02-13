@@ -8,7 +8,7 @@
 <body>
 
 <header>
-    <a href="/">Main</a>
+    <a th:href="@{/admin/main}">Main</a>
 </header>
 
 <h1>Team List</h1>
@@ -23,7 +23,7 @@
         <th>Detail URL</th>
     </tr>
     <tr th:each="team : ${teams}">
-        <td> <a th:href="@{/teams/{teamId}(teamId=${team.id})}" th:text="${team.name}">팀 이름</a></td>
+        <td> <a th:href="@{/admin/teams/{teamId}(teamId=${team.id})}" th:text="${team.name}">팀 이름</a></td>
         <td th:text="${team.headCoach}">감독</td>
         <td th:text="${team.won}">승 수</td>
         <td th:text="${team.lost}">패 수</td>
@@ -33,7 +33,7 @@
 </table>
 
 <div>
-    <button th:onclick="|location.href='@{/teams/addTeamForm}'|">Add Team</button>
+    <button th:onclick="|location.href='@{/admin/teams/addTeamForm}'|">Add Team</button>
 </div>
 
 </body>

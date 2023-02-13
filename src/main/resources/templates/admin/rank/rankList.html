@@ -5,7 +5,7 @@
     <title>Team Rank</title>
 </head>
 <header>
-    <a href="/">Main</a>
+    <a th:href="@{/admin/main}">Main</a>
 </header>
 
 <body>
@@ -22,7 +22,7 @@
     </tr>
     <tr th:each="team, iterStat : ${rank}">
         <td th:text="${iterStat.count}">순위</td>
-        <td><a th:href="@{/teams/{teamId}(teamId=${team.id})}" th:text="${team.name}">팀 이름</a></td>
+        <td><a th:href="@{/templates/admin/teams/{teamId}(teamId=${team.id})}" th:text="${team.name}">팀 이름</a></td>
         <td th:text="${team.won}">승 수</td>
         <td th:text="${team.lost}">패 수</td>
         <td th:text="${team.score}">점수</td>

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/teams")
+@RequestMapping("/admin/teams")
 public class TeamController {
 
     private final TeamService teamService;
@@ -23,7 +23,7 @@ public class TeamController {
     @GetMapping("/addTeamForm")
     public String addTeamFrom(Model model) {
         model.addAttribute("form", new TeamAddDto());
-        return "teams/addTeamForm";
+        return "admin/teams/addTeamForm";
     }
 
     @PostMapping("/addTeamForm")
@@ -43,13 +43,13 @@ public class TeamController {
 
         teamService.addTeam(team, assistantCoachNames);
 
-        return "redirect:/teams";
+        return "redirect:/admin/teams";
     }
 
     @GetMapping("/{teamId}/delete")
     public String deleteTeam(@PathVariable Long teamId) {
         teamService.deleteTeam(teamId);
-        return "redirect:/teams";
+        return "redirect:/admin/teams";
     }
 
     @GetMapping
@@ -58,7 +58,7 @@ public class TeamController {
 
         model.addAttribute("teams", teams);
 
-        return "teams/teamList";
+        return "admin/teams/teamList";
     }
 
     @GetMapping("/{teamId}")
@@ -67,7 +67,7 @@ public class TeamController {
         List<AssistantCoach> assistantCoaches = teamService.findAssistantCoaches(teamId);
         model.addAttribute("team", team);
         model.addAttribute("assistantCoaches", assistantCoaches);
-        return "teams/teamDetail";
+        return "admin/teams/teamDetail";
     }
 
     @GetMapping("/{teamId}/updateScore")
@@ -80,13 +80,13 @@ public class TeamController {
                 .build();
 
         model.addAttribute("form", form);
-        return "teams/updateScoreForm";
+        return "admin/teams/updateScoreForm";
     }
 
     @PostMapping("/{teamId}/updateScore")
     public String updateScore(@PathVariable Long teamId,
                               @ModelAttribute TeamUpdateScoreDto teamUpdateScoreDto) {
         teamService.updateScore(teamId, teamUpdateScoreDto);
-        return "redirect:/teams/{teamId}";
+        return "redirect:/admin/teams/{teamId}";
     }
 }
