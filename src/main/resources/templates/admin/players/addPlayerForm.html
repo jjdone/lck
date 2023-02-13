@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Add Player Form</title>
 </head>
 <body>
-$END$
+<header>
+  <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Add Player</h1>
+
+<form action="#" th:action th:object="${form}" method="post">
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" id="name" th:field="*{name}" />
+  </div>
+  <div>
+    <label for="nickname">Nickname: </label>
+    <input type="text" id="nickname" th:field="*{nickname}" />
+  </div>
+  <div>
+    <label for="position">Position: </label>
+    <select name="position" id="position">
+      <option th:each="type : ${position}" th:value="${type}" th:text="${type}" />
+    </select>
+  </div>
+  <div>
+    <label for="team">Team: </label>
+    <select name="teamId" id="team">
+      <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+    </select>
+  </div>
+  <div>
+    <label for="detailUrl">Detail URL: </label>
+    <input type="text" id="detailUrl" th:field="*{detailUrl}" />
+  </div>
+  <div>
+    <input type="submit" value="Add Player" />
+  </div>
+</form>
+<hr>
+<div>
+  <button th:onclick="|location.href='@{/admin/players}'|">Player List</button>
+</div>
+
 </body>
 </html>
