@@ -51,6 +51,11 @@ public class PlayerService {
         return playerRepository.findById(playerId).get();
     }
 
+    // 모든 선수 조회
+    public List<Player> findPlayers() {
+        return playerRepository.findAll();
+    }
+
 
     // 특정 팀의 선수 목록 조회
     @Transactional
