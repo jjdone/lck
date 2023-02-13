@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<header>
+    <a href="/">Main</a>
+</header>
+
 <h1>Team Detail</h1>
 
 <div>
@@ -14,7 +18,7 @@
     <p>Won: <span th:text="${team.won}"></span></p>
     <p>Lost: <span th:text="${team.lost}"></span></p>
     <p>Score: <span th:text="${team.score}"></span></p>
-    <p>Detail URL: <span th:text="${team.detailUrl}"></span></p>
+    <p>Detail URL: <a th:href="${team.detailUrl}" th:target="_blank">나무위키</a></p>
 </div>
 
 <h2>Assistant Coaches</h2>
@@ -27,6 +31,11 @@
         <td th:text="${assistantCoach.name}"></td>
     </tr>
 </table>
+<hr>
+<div>
+    <button th:onclick="|location.href='@{/teams/{teamId}/updateScore(teamId=${team.id})}'|">Update Score</button>
+    <button th:onclick="|location.href='@{/teams}'|">Team List</button>
+</div>
 
 </body>
 </html>

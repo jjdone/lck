@@ -5,7 +5,12 @@
     <title>Add Team Form</title>
 </head>
 <body>
+<header>
+    <a href="/">Main</a>
+</header>
+
 <h1>Add Team Form</h1>
+
 <form action="#" th:action th:object="${form}" method="post">
     <div>
         <label for="name">Name:</label>
@@ -45,5 +50,10 @@
     </div>
     <button type="submit">Add Team</button>
 </form>
+<hr>
+<div>
+    <button th:onclick="|location.href='@{/teams}'|">Team List</button>
+</div>
+
 </body>
 </html>

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Team Rank</title>
 </head>
+<header>
+    <a href="/">Main</a>
+</header>
+
 <body>
 
 <h1>Team Rank</h1>
@@ -17,11 +21,11 @@
         <th>Score</th>
     </tr>
     <tr th:each="team, iterStat : ${rank}">
-        <td th:text="${iterStat.count}"></td>
-        <td th:text="${team.name}"></td>
-        <td th:text="${team.won}"></td>
-        <td th:text="${team.lost}"></td>
-        <td th:text="${team.score}"></td>
+        <td th:text="${iterStat.count}">순위</td>
+        <td><a th:href="@{/teams/{teamId}(teamId=${team.id})}" th:text="${team.name}">팀 이름</a></td>
+        <td th:text="${team.won}">승 수</td>
+        <td th:text="${team.lost}">패 수</td>
+        <td th:text="${team.score}">점수</td>
     </tr>
 </table>
 
