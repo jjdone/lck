@@ -69,7 +69,7 @@ class PlayerServiceTest {
         Long saveId = playerService.addPlayer(player);
         Player findPlayer = playerRepository.findById(saveId).get();
         //when
-        Long deleteId = playerService.deletePlayer(findPlayer);
+        Long deleteId = playerService.deletePlayer(findPlayer.getId());
         //then
         assertThat(playerRepository.findById(deleteId)).isEqualTo(Optional.empty());
     }

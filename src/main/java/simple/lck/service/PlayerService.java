@@ -33,7 +33,8 @@ public class PlayerService {
 
     // 선수 삭제
     @Transactional
-    public Long deletePlayer(Player player) {
+    public Long deletePlayer(Long playerId) {
+        Player player = playerRepository.findById(playerId).get();
         validateNonexistentPlayer(player);
         playerRepository.delete(player);
         return player.getId();
