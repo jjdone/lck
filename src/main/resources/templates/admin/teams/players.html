@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Players</title>
 </head>
 <body>
-$END$
+<header>
+    <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1 th:text="${players.get(0).team.name}+'\'s Players'">Players</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Nickname</th>
+        <th>Position</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.name}"></td>
+        <td th:text="${player.nickname}"></td>
+        <td th:text="${player.position}"></td>
+        <td><a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}"></a></td>
+        <td>
+            <a th:href="${player.detailUrl}" th:target="_blank" th:text="Details">Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
+
+
+
