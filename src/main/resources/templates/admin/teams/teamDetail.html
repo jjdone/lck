@@ -35,6 +35,7 @@
 <div>
     <button th:onclick="|location.href='@{/admin/teams/{teamId}/updateScore(teamId=${team.id})}'|">Update Score</button>
     <button th:onclick="|location.href='@{/admin/teams}'|">Team List</button>
+    <button th:onclick="|location.href='@{/admin/teams/{teamId}/delete(teamId=${team.id})}'|">Delete Team</button>
 </div>
 
 </body>
