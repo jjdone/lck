@@ -3,10 +3,7 @@ package simple.lck.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import simple.lck.configuration.Position;
 import simple.lck.domain.Player;
 import simple.lck.domain.Team;
@@ -58,4 +55,19 @@ public class PlayerController {
         model.addAttribute("players", players);
         return "admin/players/playerList";
     }
+
+    @GetMapping("/{playerId}")
+    public String playerDetail(@PathVariable Long playerId, Model model) {
+        Player player = playerService.findOne(playerId);
+        model.addAttribute("player", player);
+        return "admin/players/playerDetail";
+    }
+
+    @GetMapping("/{playerId}/delete")
+    public String deletePlayer(@PathVariable Long playerId) {
+        playerService.deletePlayer(playerId);
+        return "redirect:/admin/players";
+    }
+
+
 }
