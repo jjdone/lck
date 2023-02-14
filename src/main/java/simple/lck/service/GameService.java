@@ -9,6 +9,8 @@ import simple.lck.domain.Game;
 import simple.lck.domain.GameTeam;
 import simple.lck.dto.game.*;
 import simple.lck.repository.GameRepository;
+import simple.lck.repository.PlayerRepository;
+import simple.lck.repository.TeamRepository;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.List;
 public class GameService {
 
     private final GameRepository gameRepository;
+    private final TeamRepository teamRepository;
+    private final PlayerRepository playerRepository;
     private final EntityManager em;
 
     // 게임 일정 추가
@@ -32,22 +36,22 @@ public class GameService {
                 .build();
 
         GameTeam gameTeam1 = GameTeam.builder()
-                .team(gameAddDto.getTeam1())
-                .top(gameAddDto.getTop1())
-                .jgl(gameAddDto.getJgl1())
-                .mid(gameAddDto.getMid1())
-                .bot(gameAddDto.getBot1())
-                .spt(gameAddDto.getSpt1())
+                .team(teamRepository.findById(gameAddDto.getTeam1Id()).get())
+                .top(playerRepository.findById(gameAddDto.getTop1Id()).get())
+                .jgl(playerRepository.findById(gameAddDto.getJgl1Id()).get())
+                .mid(playerRepository.findById(gameAddDto.getMid1Id()).get())
+                .bot(playerRepository.findById(gameAddDto.getBot1Id()).get())
+                .spt(playerRepository.findById(gameAddDto.getSpt1Id()).get())
                 .point(gameAddDto.getTeam1_point())
                 .build();
 
         GameTeam gameTeam2 = GameTeam.builder()
-                .team(gameAddDto.getTeam2())
-                .top(gameAddDto.getTop2())
-                .jgl(gameAddDto.getJgl2())
-                .mid(gameAddDto.getMid2())
-                .bot(gameAddDto.getBot2())
-                .spt(gameAddDto.getSpt2())
+                .team(teamRepository.findById(gameAddDto.getTeam2Id()).get())
+                .top(playerRepository.findById(gameAddDto.getTop2Id()).get())
+                .jgl(playerRepository.findById(gameAddDto.getJgl2Id()).get())
+                .mid(playerRepository.findById(gameAddDto.getMid2Id()).get())
+                .bot(playerRepository.findById(gameAddDto.getBot2Id()).get())
+                .spt(playerRepository.findById(gameAddDto.getSpt2Id()).get())
                 .point(gameAddDto.getTeam2_point())
                 .build();
 
@@ -61,7 +65,8 @@ public class GameService {
     @Transactional
     public List<GameScheduleDto> findGames() {
         String query = "select new simple.lck.dto.game.GameListDto(g.id, g.gameState, d.round, d.season, t.team, t.point) " +
-                "from GameTeam t join t.game g join g.date d ";
+                "from GameTeam t join t.game g join g.date d " +
+                "order by d.startDate ";
         List<GameListDto> resultList = em.createQuery(query, GameListDto.class).getResultList();
         List<GameScheduleDto> gameList = new ArrayList<>();
 
@@ -71,7 +76,7 @@ public class GameService {
 
         for (int i = 0; i < resultList.size(); i += 2) {
             GameScheduleDto gameScheduleDto = GameScheduleDto.builder()
-                    .game_id(resultList.get(i).getId())
+                    .game(gameRepository.findById(resultList.get(i).getId()).get())
                     .gameState(resultList.get(i).getGameState())
                     .round(resultList.get(i).getRound())
                     .season(resultList.get(i).getSeason())
@@ -109,6 +114,7 @@ public class GameService {
                 .build();
     }
 
+    //경기 업데이트
     @Transactional
     public void updateGameTeam(Long gameId, GameTeamUpdateDto gameTeamUpdateDto) {
         Game findGame = gameRepository.findById(gameId).get();
