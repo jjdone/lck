@@ -1,10 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Add Game Form</title>
 </head>
 <body>
-$END$
+<header>
+    <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Add Game Form</h1>
+
+<form action="#" th:action th:object="${form}" method="post">
+    <fieldset>
+        <legend>Season Information</legend>
+
+        <div>
+            <label for="season">Season:</label>
+            <select name="season" id="season" th:field="*{season}">
+                <option value=" ">-- 선택 --</option>
+                <option th:each="season : ${season}" th:value="${season}" th:text="${season}"/>
+            </select>
+        </div>
+
+        <div>
+            <label for="round">Round:</label>
+            <input type="text" id="round" th:field="*{round}" />
+        </div>
+
+        <div>
+            <label for="startDate">Start Date:</label>
+            <input type="datetime-local" id="startDate" th:field="*{startDate}" />
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <fieldset class="col-6">
+            <legend>Team 1 Information</legend>
+            <div>
+                <label for="team1">Team1:</label>
+                <select name="team1" id="team1" th:field="*{team1Id}">
+                    <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="top1">TOP: </label>
+                <select name="top1" id="top1" th:field="*{top1Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionTop}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="jgl1">JGL: </label>
+                <select name="jgl1" id="jgl1" th:field="*{jgl1Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionJgl}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="mid1">MID: </label>
+                <select name="mid1" id="mid1" th:field="*{mid1Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionMid}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="bot1">BOT: </label>
+                <select name="bot1" id="bot1" th:field="*{bot1Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionBot}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="spt1">SPT: </label>
+                <select name="spt1" id="spt1" th:field="*{spt1Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionSpt}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset class="col-6">
+            <legend>Team 2 Information</legend>
+            <div>
+                <label for="team2">Team2:</label>
+                <select name="team2" id="team2" th:field="*{team2Id}">
+                    <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="top2">TOP: </label>
+                <select name="top2" id="top2" th:field="*{top2Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionTop}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="jgl2">JGL: </label>
+                <select name="jgl2" id="jgl2" th:field="*{jgl2Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionJgl}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="mid2">MID: </label>
+                <select name="mid2" id="mid2" th:field="*{mid2Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionMid}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="bot2">BOT: </label>
+                <select name="bot2" id="bot2" th:field="*{bot2Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionBot}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+
+            <div>
+                <label for="spt2">SPT: </label>
+                <select name="spt2" id="spt2" th:field="*{spt2Id}">
+                    <option th:each="player : ${players}" th:value="${player.id}"
+                            th:if="${player.position} == ${positionSpt}"
+                            th:text="${player.team.name} + ': ' + ${player.nickname} +'(' + ${player.name} + ')'"/>
+                </select>
+            </div>
+        </fieldset>
+    </div>
+
+    <fieldset>
+        <legend>Score</legend>
+
+        <div>
+            <label for="team1Point">Team 1 Point:</label>
+            <input type="number" id="team1Point" th:field="*{team1_point}" />
+        </div>
+
+        <div>
+            <label for="team2Point">Team 2 Point:</label>
+            <input type="number" id="team2Point" th:field="*{team2_point}" />
+        </div>
+    </fieldset>
+
+    <button type="submit">Add Game</button>
+</form>
+
 </body>
 </html>

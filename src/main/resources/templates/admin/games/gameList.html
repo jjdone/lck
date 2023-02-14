@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Game List</title>
+    <style>
+        table {
+            width: 100%;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #444444;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-$END$
+<header>
+    <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Game List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Game ID</th>
+        <th>Season</th>
+        <th>Round</th>
+        <th>Game State</th>
+        <th>Team1</th>
+        <th>Team2</th>
+        <th>Team1's Points</th>
+        <th>Team2's Points</th>
+        <th>Game Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="game : ${games}">
+        <td th:text="${game.game.id}"></td>
+        <td th:text="${game.season}"></td>
+        <td th:text="${game.round}"></td>
+        <td th:text="${game.gameState}"></td>
+        <td th:text="${game.team1.name}"></td>
+        <td th:text="${game.team2.name}"></td>
+        <td th:text="${game.team1_point}"></td>
+        <td th:text="${game.team2_point}"></td>
+        <td th:text="${game.game.date.startDate}"></td>
+    </tr>
+    </tbody>
+</table>
+<!-- Add link for adding new games here -->
 </body>
 </html>
