@@ -4,13 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 import simple.lck.configuration.GameState;
 import simple.lck.configuration.Season;
+import simple.lck.domain.Game;
 import simple.lck.domain.Team;
 
 @Data
 @Builder
 public class GameScheduleDto {
 
-    private Long game_id;
+    private Game game;
     private Season season;
     private String round;
     private GameState gameState;
