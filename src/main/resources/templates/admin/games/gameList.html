@@ -24,7 +24,6 @@
 <table>
     <thead>
     <tr>
-        <th>Game ID</th>
         <th>Season</th>
         <th>Round</th>
         <th>Game State</th>
@@ -37,7 +36,6 @@
     </thead>
     <tbody>
     <tr th:each="game : ${games}">
-        <td th:text="${game.game.id}"></td>
         <td th:text="${game.season}"></td>
         <td th:text="${game.round}"></td>
         <td th:text="${game.gameState}"></td>
@@ -49,6 +47,10 @@
     </tr>
     </tbody>
 </table>
-<!-- Add link for adding new games here -->
+
+<div>
+    <button th:onclick="|location.href='@{/admin/games/addGameForm}'|">Add Game</button>
+</div>
+
 </body>
 </html>
