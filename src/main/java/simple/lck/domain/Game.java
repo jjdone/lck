@@ -45,6 +45,13 @@ public class Game {
         game.addGameTeam(gameTeam1);
         game.addGameTeam(gameTeam2);
 
+        LocalDateTime now = LocalDateTime.now();
+
+        if (date.getStartDate().isAfter(now)) {
+            game.setGameState(BEFORE_GAME);
+            return game;
+        }
+        game.setGameState(END);
         return game;
     }
 
