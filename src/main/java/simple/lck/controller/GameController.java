@@ -3,16 +3,16 @@ package simple.lck.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import simple.lck.configuration.GameState;
 import simple.lck.configuration.Position;
 import simple.lck.configuration.Season;
+import simple.lck.domain.GameTeam;
 import simple.lck.domain.Player;
 import simple.lck.domain.Team;
 import simple.lck.dto.game.GameAddDto;
 import simple.lck.dto.game.GameScheduleDto;
+import simple.lck.dto.game.GameTeamUpdateDto;
 import simple.lck.service.GameService;
 import simple.lck.service.PlayerService;
 import simple.lck.service.TeamService;
@@ -81,5 +81,36 @@ public class GameController {
         List<GameScheduleDto> games = gameService.findGames();
         model.addAttribute("games", games);
         return "admin/games/gameList";
+    }
+
+    @GetMapping("/{gameId}")
+    public String gameDetails(@PathVariable Long gameId, Model model) {
+        List<GameTeam> gameDetails = gameService.findGameDetails(gameId);
+        model.addAttribute("gameTeams", gameDetails);
+        return "admin/games/gameDetail";
+    }
+
+    @GetMapping("/{gameId}/deleteGame")
+    public String deleteGame(@PathVariable Long gameId) {
+        gameService.deleteGame(gameId);
+        return "redirect:/admin/games";
+    }
+
+    @GetMapping("/{gameId}/updateScore")
+    public String updateScoreForm(@PathVariable Long gameId, Model model) {
+        GameTeamUpdateDto updateDto = gameService.findGameTeams(gameId);
+        model.addAttribute("form", updateDto);
+        return "admin/games/updateScoreForm";
+    }
+
+    @ModelAttribute("gameStates")
+    public GameState[] gameStates() {
+        return GameState.values();
+    }
+
+    @PostMapping("/{gameId}/updateScore")
+    public String updateScore(@PathVariable Long gameId, @ModelAttribute GameTeamUpdateDto gameTeamUpdateDto) {
+        gameService.updateGameTeam(gameId, gameTeamUpdateDto);
+        return "redirect:/admin/games";
     }
 }
