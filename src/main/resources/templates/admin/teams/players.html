@@ -34,8 +34,8 @@
     </thead>
     <tbody>
     <tr th:each="player : ${players}">
-        <td th:text="${player.name}"></td>
-        <td th:text="${player.nickname}"></td>
+        <td><a th:href="@{/admin/players/{playerId}(playerId=${player.id})}" th:text="${player.name}"></a></td>
+        <td><a th:href="@{/admin/players/{playerId}(playerId=${player.id})}" th:text="${player.nickname}"></a></td>
         <td th:text="${player.position}"></td>
         <td><a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}"></a></td>
         <td>
