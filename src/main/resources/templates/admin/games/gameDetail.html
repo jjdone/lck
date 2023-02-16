@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Player Detail</title>
 </head>
 <body>
-$END$
+<header>
+  <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Game Detail</h1>
+
+<div class="row">
+  <fieldset class="col-6" th:each="gameTeam : ${gameTeams}">
+    <legend th:text="${gameTeam.team.name} + '의 경기 정보'">Team Information</legend>
+    <div>
+      <div>
+      <a th:href="@{/admin/players/{playerId}(playerId=${gameTeam.top.id})}"
+         th:text="${gameTeam.top.nickname} + '(' + ${gameTeam.top.name} + ')'">TOP</a>
+      </div>
+      <div>
+      <a th:href="@{/admin/players/{playerId}(playerId=${gameTeam.jgl.id})}"
+         th:text="${gameTeam.jgl.nickname} + '(' + ${gameTeam.jgl.name} + ')'">JGL</a>
+      </div>
+      <div>
+      <a th:href="@{/admin/players/{playerId}(playerId=${gameTeam.mid.id})}"
+         th:text="${gameTeam.mid.nickname} + '(' + ${gameTeam.mid.name} + ')'">MID</a>
+      </div>
+      <div>
+      <a th:href="@{/admin/players/{playerId}(playerId=${gameTeam.bot.id})}"
+         th:text="${gameTeam.bot.nickname} + '(' + ${gameTeam.bot.name} + ')'">BOT</a>
+      </div>
+      <div>
+      <a th:href="@{/admin/players/{playerId}(playerId=${gameTeam.spt.id})}"
+         th:text="${gameTeam.spt.nickname} + '(' + ${gameTeam.spt.name} + ')'">SPT</a>
+      </div>
+    </div>
+
+    <p th:text="${gameTeam.point} + '점'">point</p>
+
+  </fieldset>
+</div>
+
+<button th:onclick="|location.href='@{/admin/games/{gameId}/updateScore(gameId=${gameTeams.get(0).game.id})}'|">Update Game</button>
+<button th:onclick="|location.href='@{/admin/games}'|">Game List</button>
+<button th:onclick="|location.href='@{/admin/games/{gameId}/deleteGame(gameId=${gameTeams.get(0).game.id})}'|">Delete Game</button>
+
 </body>
 </html>
