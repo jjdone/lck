@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Update Game Score</title>
 </head>
 <body>
-$END$
+
+<header>
+  <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Update Game Score</h1>
+
+<form action="#" th:action th:object="${form}" method="post">
+  <div>
+    <label th:text="|*{team1.name} points: |">Team1: </label>
+    <input type="hidden" th:field="*{team1}" th:readonly>
+    <input type="number" th:field="*{point1}"/>
+  </div>
+  <div>
+    <label th:text="|*{team2.name} points|">Team2: </label>
+    <input type="hidden" th:field="*{team2}" th:readonly>
+    <input type="number" th:field="*{point2}"/>
+  </div>
+  <div>
+    <label for="gameState">Game State:</label>
+    <select name="gameState" id="gameState" th:field="*{gameState}">
+      <option value=" ">-- 선택 --</option>
+      <option th:each="gameState : ${gameStates}" th:value="${gameState}" th:text="${gameState}"/>
+    </select>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
 </body>
 </html>
