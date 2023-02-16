@@ -91,6 +91,15 @@ public class GameService {
         return gameList;
     }
 
+    // 한 경기 정보
+    @Transactional
+    public List<GameTeam> findGameDetails(Long gameId) {
+        String query = "select gt from GameTeam gt where gt.game.id = :gameId";
+        return em.createQuery(query, GameTeam.class)
+                .setParameter("gameId", gameId)
+                .getResultList();
+    }
+
     // 경기를 업데이트할 정보 가져오기
     @Transactional
     public GameTeamUpdateDto findGameTeams(Long gameId) {
@@ -121,5 +130,10 @@ public class GameService {
         findGame.updatePoint(gameTeamUpdateDto.getTeam1(), gameTeamUpdateDto.getPoint1(),
                 gameTeamUpdateDto.getTeam2(), gameTeamUpdateDto.getPoint2(),
                 gameTeamUpdateDto.getGameState());
+    }
+
+    @Transactional
+    public void deleteGame(Long gameId) {
+        gameRepository.deleteById(gameId);
     }
 }
