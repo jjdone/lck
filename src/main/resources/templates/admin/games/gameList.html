@@ -24,6 +24,7 @@
 <table>
     <thead>
     <tr>
+        <th>Game Id</th>
         <th>Season</th>
         <th>Round</th>
         <th>Game State</th>
@@ -36,14 +37,15 @@
     </thead>
     <tbody>
     <tr th:each="game : ${games}">
-        <td th:text="${game.season}"></td>
-        <td th:text="${game.round}"></td>
-        <td th:text="${game.gameState}"></td>
-        <td th:text="${game.team1.name}"></td>
-        <td th:text="${game.team2.name}"></td>
-        <td th:text="${game.team1_point}"></td>
-        <td th:text="${game.team2_point}"></td>
-        <td th:text="${game.game.date.startDate}"></td>
+        <td><a th:href="@{/admin/games/{gameId}(gameId=${game.game.id})}" th:text="${game.game.id}">경기</a></td>
+        <td th:text="${game.season}">시즌</td>
+        <td th:text="${game.round}">라운드</td>
+        <td th:text="${game.gameState}">경기 상태</td>
+        <td><a th:href="@{/admin/teams/{teamId}(teamId=${game.team1.id})}" th:text="${game.team1.name}">팀1</a></td>
+        <td><a th:href="@{/admin/teams/{teamId}(teamId=${game.team2.id})}" th:text="${game.team2.name}">팀2</a></td>
+        <td th:text="${game.team1_point}">팀1 점수</td>
+        <td th:text="${game.team2_point}">팀2 점수</td>
+        <td th:text="${game.game.date.startDate}">경기 날짜</td>
     </tr>
     </tbody>
 </table>
