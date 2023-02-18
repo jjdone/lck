@@ -1,4 +1,4 @@
-package simple.lck.controller;
+package simple.lck.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

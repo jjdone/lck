@@ -1,4 +1,4 @@
-package simple.lck.controller;
+package simple.lck.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
