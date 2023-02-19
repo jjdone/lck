@@ -66,4 +66,12 @@ public class PlayerService {
                 .setParameter("teamId", teamId)
                 .getResultList();
     }
+
+    // POG Point 순서로 리스트 조회
+    @Transactional
+    public List<Player> findPlayersByPogPoint() {
+        String query = "select p from Player p order by p.pogPoint desc";
+        return em.createQuery(query, Player.class)
+                .getResultList();
+    }
 }

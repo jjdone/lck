@@ -43,6 +43,7 @@ public class PlayerController {
                 .nickname(playerAddDto.getNickname())
                 .position(playerAddDto.getPosition())
                 .team(team)
+                .pogPoint(playerAddDto.getPogPoint())
                 .detailUrl(playerAddDto.getDetailUrl())
                 .build();
         playerService.addPlayer(player);
@@ -69,5 +70,10 @@ public class PlayerController {
         return "redirect:/admin/players";
     }
 
-
+    @GetMapping("/pogRank")
+    public String pogRank(Model model) {
+        List<Player> playersByPogPoint = playerService.findPlayersByPogPoint();
+        model.addAttribute("players", playersByPogPoint);
+        return "admin/players/pogRank";
+    }
 }
