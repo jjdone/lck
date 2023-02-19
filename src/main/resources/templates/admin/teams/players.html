@@ -29,6 +29,7 @@
         <th>Nickname</th>
         <th>Position</th>
         <th>Team</th>
+        <th>POG Point</th>
         <th>Details</th>
     </tr>
     </thead>
@@ -38,6 +39,7 @@
         <td><a th:href="@{/admin/players/{playerId}(playerId=${player.id})}" th:text="${player.nickname}"></a></td>
         <td th:text="${player.position}"></td>
         <td><a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}"></a></td>
+        <td th:text="${player.pogPoint}"></td>
         <td>
             <a th:href="${player.detailUrl}" th:target="_blank" th:text="Details">Details</a>
         </td>

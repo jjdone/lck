@@ -31,6 +31,10 @@
         <td> <a th:href="@{/admin/teams/{teamId}(teamId=${player.team.id})}" th:text="${player.team.name}">팀 이름</a></td>
     </tr>
     <tr>
+        <th>POG Point</th>
+        <td th:text="${player.pogPoint}"></td>
+    </tr>
+    <tr>
         <th>Detail URL</th>
         <td><a th:href="${player.detailUrl}" th:target="_blank" th:text="Details"></a></td>
     </tr>
