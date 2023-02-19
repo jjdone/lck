@@ -31,14 +31,16 @@ public class Player {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    private int pogPoint;
     private String detailUrl;
 
     @Builder
-    public Player(String name, String nickname, Position position, Team team, String detailUrl) {
+    public Player(String name, String nickname, Position position, Team team, int pogPoint, String detailUrl) {
         this.name = name;
         this.nickname = nickname;
         this.position = position;
         this.team = team;
+        this.pogPoint = pogPoint;
         this.detailUrl = detailUrl;
     }
 }
