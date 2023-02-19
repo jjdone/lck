@@ -1,2 +1,4 @@
-package simple.lck.controller.api;public class PlayerApiController {
+package simple.lck.controller.api;
+
+public class PlayerApiController {
 }
