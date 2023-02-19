@@ -76,4 +76,22 @@ public class PlayerController {
         model.addAttribute("players", playersByPogPoint);
         return "admin/players/pogRank";
     }
+
+    @GetMapping("/{playerId}/updatePlayer")
+    public String updatePlayerForm(@PathVariable Long playerId, Model model) {
+        Player player = playerService.findOne(playerId);
+        List<Team> teams = teamService.findTeams();
+
+        model.addAttribute("player", player);
+        model.addAttribute("teams", teams);
+        return "admin/players/updatePlayerForm";
+    }
+
+    @PostMapping("/{playerId}/updatePlayer")
+    public String updatePlayer(@PathVariable Long playerId,
+                               @RequestParam("teamId") Long teamId,
+                               @RequestParam("pogPoint") int pogPoint) {
+        playerService.updatePlayer(playerId, teamId, pogPoint);
+        return "redirect:/admin/players/{playerId}";
+    }
 }

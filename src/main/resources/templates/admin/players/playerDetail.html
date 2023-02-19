@@ -43,6 +43,7 @@
 <div>
     <button th:onclick="|location.href='@{/admin/players}'|">Player List</button>
     <button th:onclick="|location.href='@{/admin/players/{playerId}/delete(playerId=${player.id})}'|">Delete Player</button>
+    <button th:onclick="|location.href='@{/admin/players/{playerId}/updatePlayer(playerId=${player.id})}'|">Update Player</button>
 </div>
 </body>
 </html>

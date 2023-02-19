@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Add Player Form</title>
 </head>
 <body>
-$END$
+<header>
+    <a th:href="@{/admin/main}">Main</a>
+</header>
+
+<h1>Add Player</h1>
+
+<form action="#" th:action th:object="${player}" method="post">
+    <div>
+        <label for="team">Team: </label>
+        <select name="teamId" id="team">
+            <option th:each="team : ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="pogPoint">POG Point: </label>
+        <input type="number" name="pogPoint" id="pogPoint" th:field="*{pogPoint}" />
+    </div>
+    <div>
+        <input type="submit" value="Update Player" />
+    </div>
+</form>
+
 </body>
 </html>

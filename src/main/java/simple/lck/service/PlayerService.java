@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.Player;
+import simple.lck.domain.Team;
 import simple.lck.repository.PlayerRepository;
+import simple.lck.repository.TeamRepository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final TeamRepository teamRepository;
     private final EntityManager em;
 
     // 선수 등록
@@ -73,5 +76,12 @@ public class PlayerService {
         String query = "select p from Player p order by p.pogPoint desc";
         return em.createQuery(query, Player.class)
                 .getResultList();
+    }
+
+    // Player 업데이트
+    @Transactional
+    public void updatePlayer(Long playerId, Long teamId, int pogPoint) {
+        Team team = teamRepository.findById(teamId).get();
+        playerRepository.updatePlayer(team, pogPoint, playerId);
     }
 }
