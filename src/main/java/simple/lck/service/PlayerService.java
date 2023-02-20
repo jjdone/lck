@@ -5,10 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.Player;
 import simple.lck.domain.Team;
+import simple.lck.dto.player.PlayerDto;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
@@ -76,5 +79,13 @@ public class PlayerService {
     public void updatePlayer(Long playerId, Long teamId, int pogPoint) {
         Team team = teamRepository.findById(teamId).get();
         playerRepository.updatePlayer(team, pogPoint, playerId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PlayerDto> findPlayerDtoOfTeamList(Long teamId) {
+        List<Player> playersOfTeam = playerRepository.findPlayersOfTeam(teamId);
+        return playersOfTeam.stream()
+                .map(player -> new PlayerDto(player))
+                .collect(toList());
     }
 }

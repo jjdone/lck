@@ -5,10 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simple.lck.domain.AssistantCoach;
 import simple.lck.domain.Team;
+import simple.lck.dto.team.TeamDetailsDto;
+import simple.lck.dto.team.TeamDto;
 import simple.lck.dto.team.TeamUpdateScoreDto;
 import simple.lck.repository.TeamRepository;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
@@ -61,11 +65,13 @@ public class TeamService {
     }
 
     // Team 목록 검색
+    @Transactional(readOnly = true)
     public List<Team> findTeams() {
         return teamRepository.findAll();
     }
 
     // Team 검색
+    @Transactional(readOnly = true)
     public Team findOne(Long teamId) {
         return teamRepository.findById(teamId).get();
     }
@@ -80,5 +86,21 @@ public class TeamService {
     @Transactional
     public List<Team> findTeamRank() {
         return teamRepository.findTeamRank();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TeamDto> findTeamDtoList() {
+        List<Team> teams = teamRepository.findAll();
+        return teams.stream()
+                .map(team -> new TeamDto(team))
+                .collect(toList());
+    }
+
+    @Transactional
+    public TeamDetailsDto findTeamDetailsDto(Long teamId) {
+        Team team = teamRepository.findById(teamId).get();
+        List<AssistantCoach> assistantCoaches = teamRepository.findAssistantCoaches(teamId);
+
+        return new TeamDetailsDto(team, assistantCoaches);
     }
 }
