@@ -15,4 +15,10 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Modifying(clearAutomatically = true)
     @Query(value = "update Player p set p.team = :team, p.pogPoint = :pogPoint where p.id = :playerId")
     int updatePlayer(@Param("team") Team team, @Param("pogPoint") int pogPoint, @Param("playerId") Long playerId);
+
+    @Query(value = "select p from Player p where p.team.id = :teamId")
+    List<Player> findPlayersOfTeam(@Param("teamId") Long teamId);
+
+    @Query(value = "select p from Player p order by p.pogPoint desc")
+    List<Player> findPlayersByPogPoint();
 }

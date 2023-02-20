@@ -12,7 +12,6 @@ import simple.lck.repository.GameRepository;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class GameService {
     private final GameRepository gameRepository;
     private final TeamRepository teamRepository;
     private final PlayerRepository playerRepository;
-    private final EntityManager em;
 
     // 게임 일정 추가
     @Transactional
@@ -64,15 +62,8 @@ public class GameService {
     // 게임 일정 조회
     @Transactional
     public List<GameScheduleDto> findGames() {
-        String query = "select new simple.lck.dto.game.GameListDto(g.id, g.gameState, d.round, d.season, t.team, t.point) " +
-                "from GameTeam t join t.game g join g.date d " +
-                "order by d.startDate ";
-        List<GameListDto> resultList = em.createQuery(query, GameListDto.class).getResultList();
+        List<GameListDto> resultList = gameRepository.findGameList();
         List<GameScheduleDto> gameList = new ArrayList<>();
-
-        for (Object res : resultList) {
-            System.out.println("res = " + res);
-        }
 
         for (int i = 0; i < resultList.size(); i += 2) {
             GameScheduleDto gameScheduleDto = GameScheduleDto.builder()
@@ -94,20 +85,13 @@ public class GameService {
     // 한 경기 정보
     @Transactional
     public List<GameTeam> findGameDetails(Long gameId) {
-        String query = "select gt from GameTeam gt where gt.game.id = :gameId";
-        return em.createQuery(query, GameTeam.class)
-                .setParameter("gameId", gameId)
-                .getResultList();
+        return gameRepository.findGameDetails(gameId);
     }
 
     // 경기를 업데이트할 정보 가져오기
     @Transactional
     public GameTeamUpdateDto findGameTeams(Long gameId) {
-        String query1 = "select new simple.lck.dto.game.GameTeamDto(t.team, t.point) " +
-                "from GameTeam t where t.game.id = :gameId";
-        List<GameTeamDto> findDto = em.createQuery(query1, GameTeamDto.class)
-                .setParameter("gameId", gameId)
-                .getResultList();
+        List<GameTeamDto> findDto = gameRepository.findGameTeams(gameId);
 
         GameState findGameState = gameRepository.findById(gameId).get().getGameState();
 

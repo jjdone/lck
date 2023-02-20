@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import simple.lck.configuration.Position;
 import simple.lck.domain.Player;
 import simple.lck.domain.Team;
-import simple.lck.dto.PlayerAddDto;
+import simple.lck.dto.player.PlayerAddDto;
 import simple.lck.service.PlayerService;
 import simple.lck.service.TeamService;
 

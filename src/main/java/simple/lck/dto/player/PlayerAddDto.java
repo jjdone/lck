@@ -1,8 +1,7 @@
-package simple.lck.dto;
+package simple.lck.dto.player;
 
 import lombok.Data;
 import simple.lck.configuration.Position;
-import simple.lck.domain.Team;
 
 @Data
 public class PlayerAddDto {

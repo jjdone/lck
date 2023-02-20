@@ -1,17 +1,18 @@
 package simple.lck.dto.game;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import simple.lck.configuration.Position;
 import simple.lck.configuration.Season;
-import simple.lck.domain.Player;
-import simple.lck.domain.Team;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameAddDto {
 
     private Season season;

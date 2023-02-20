@@ -8,7 +8,6 @@ import simple.lck.domain.Team;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -17,7 +16,6 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
-    private final EntityManager em;
 
     // 선수 등록
     @Transactional
@@ -64,18 +62,13 @@ public class PlayerService {
     // 특정 팀의 선수 목록 조회
     @Transactional
     public List<Player> findPlayersOfTeam(Long teamId) {
-        String query = "select p from Player p where p.team.id = :teamId";
-        return em.createQuery(query, Player.class)
-                .setParameter("teamId", teamId)
-                .getResultList();
+        return playerRepository.findPlayersOfTeam(teamId);
     }
 
     // POG Point 순서로 리스트 조회
     @Transactional
     public List<Player> findPlayersByPogPoint() {
-        String query = "select p from Player p order by p.pogPoint desc";
-        return em.createQuery(query, Player.class)
-                .getResultList();
+        return playerRepository.findPlayersByPogPoint();
     }
 
     // Player 업데이트

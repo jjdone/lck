@@ -1,18 +1,15 @@
 package simple.lck.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import simple.lck.configuration.Position;
 import simple.lck.domain.Player;
 import simple.lck.domain.Team;
 import simple.lck.repository.PlayerRepository;
 import simple.lck.repository.TeamRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +41,8 @@ class PlayerServiceTest {
         teamRepository.save(team);
 
         player = Player.builder()
-                .name("Lee")
-                .nickname("Faker")
+                .name("L")
+                .nickname("F")
                 .position(MID)
                 .team(team)
                 .detailUrl("https")

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static simple.lck.configuration.GameState.END;
 import static simple.lck.configuration.Position.MID;
 import static simple.lck.configuration.Season.*;
 
@@ -62,9 +63,9 @@ class GameServiceTest {
         gameAddDto = GameAddDto.builder()
                 .season(SPRING)
                 .round("1R")
-                .startDate(LocalDateTime.of(2023, 2, 20, 17,0,0))
-                .team1(team).top1(player).jgl1(player).mid1(player).bot1(player).spt1(player)
-                .team2(team).top2(player).jgl2(player).mid2(player).bot2(player).spt2(player)
+                .startDate(LocalDateTime.of(2023, 2, 19, 17,0,0))
+                .team1Id(team.getId()).top1Id(player.getId()).jgl1Id(player.getId()).mid1Id(player.getId()).bot1Id(player.getId()).spt1Id(player.getId())
+                .team2Id(team.getId()).top2Id(player.getId()).jgl2Id(player.getId()).mid2Id(player.getId()).bot2Id(player.getId()).spt2Id(player.getId())
                 .team1_point(0)
                 .team2_point(0)
                 .build();
@@ -102,7 +103,7 @@ class GameServiceTest {
         assertThat(findGameTeams.getTeam2().getName()).isEqualTo("T1");
         assertThat(findGameTeams.getPoint1()).isEqualTo(0);
         assertThat(findGameTeams.getPoint2()).isEqualTo(0);
-        assertThat(findGameTeams.getGameState()).isEqualTo(null);
+        assertThat(findGameTeams.getGameState()).isEqualTo(END);
     }
 
     @Test
