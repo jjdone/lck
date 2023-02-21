@@ -29,4 +29,10 @@ public class PlayerApiController {
         PlayerDto playerDto = playerService.findPlayerDto(playerId);
         return ResponseEntity.ok(playerDto);
     }
+
+    @GetMapping("/rank")
+    public ResponseEntity<?> playerRank() {
+        List<PlayerDto> playerRank = playerService.findPlayerRank();
+        return ResponseEntity.ok(playerRank);
+    }
 }
