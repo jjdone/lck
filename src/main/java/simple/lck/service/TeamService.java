@@ -88,19 +88,32 @@ public class TeamService {
         return teamRepository.findTeamRank();
     }
 
+    // ------- api function -------
+
+    //팀 리스트
     @Transactional(readOnly = true)
     public List<TeamDto> findTeamDtoList() {
         List<Team> teams = teamRepository.findAll();
         return teams.stream()
-                .map(team -> new TeamDto(team))
+                .map(TeamDto::new)
                 .collect(toList());
     }
 
+    // 팀 상세
     @Transactional
     public TeamDetailsDto findTeamDetailsDto(Long teamId) {
         Team team = teamRepository.findById(teamId).get();
         List<AssistantCoach> assistantCoaches = teamRepository.findAssistantCoaches(teamId);
 
         return new TeamDetailsDto(team, assistantCoaches);
+    }
+
+    // 팀 정규 순위
+    @Transactional
+    public List<TeamDto> findTeamDtoRank() {
+        List<Team> teamRank = teamRepository.findTeamRank();
+        return teamRank.stream()
+                .map(TeamDto::new)
+                .collect(toList());
     }
 }
