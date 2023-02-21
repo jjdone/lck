@@ -7,6 +7,8 @@ import simple.lck.configuration.GameState;
 import simple.lck.configuration.Season;
 import simple.lck.domain.Team;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,4 +20,5 @@ public class GameListDto {
     private Season season;
     private Team team;
     private int point;
+    private LocalDateTime startDate;
 }
