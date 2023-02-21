@@ -107,4 +107,13 @@ public class PlayerService {
         Player player = playerRepository.findById(playerId).get();
         return new PlayerDto(player);
     }
+
+    // 선수 순위 조회
+    @Transactional
+    public List<PlayerDto> findPlayerRank() {
+        List<Player> playersRank = playerRepository.findPlayersByPogPoint();
+        return playersRank.stream()
+                .map(PlayerDto::new)
+                .collect(toList());
+    }
 }
