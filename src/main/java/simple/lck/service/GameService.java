@@ -72,9 +72,9 @@ public class GameService {
                     .round(resultList.get(i).getRound())
                     .season(resultList.get(i).getSeason())
                     .team1(resultList.get(i).getTeam())
-                    .team2(resultList.get(i+1).getTeam())
+                    .team2(resultList.get(i + 1).getTeam())
                     .team1_point(resultList.get(i).getPoint())
-                    .team2_point(resultList.get(i+1).getPoint())
+                    .team2_point(resultList.get(i + 1).getPoint())
                     .startDate(resultList.get(i).getStartDate())
                     .build();
             gameList.add(gameScheduleDto);
@@ -122,9 +122,26 @@ public class GameService {
         gameRepository.deleteById(gameId);
     }
 
+    // ------- api -------
+
+    // 메인(오늘의 경기) 정보 조회
     @Transactional
     public GameBeforeDto findMain() {
         List<GameListDto> beforeGameList = gameRepository.findBeforeGameList(GameState.BEFORE_GAME);
         return new GameBeforeDto(beforeGameList.get(0), beforeGameList.get(1));
+    }
+
+    // 경기 리스트 조회
+    @Transactional
+    public List<GameDto> findGameDtoList() {
+        List<GameListDto> resultList = gameRepository.findGameList();
+        List<GameDto> gameDtoList = new ArrayList<>();
+
+        for (int i = 0; i < resultList.size(); i += 2) {
+            GameDto gameDto = new GameDto(resultList.get(i), resultList.get(1));
+            gameDtoList.add(gameDto);
+        }
+
+        return gameDtoList;
     }
 }
