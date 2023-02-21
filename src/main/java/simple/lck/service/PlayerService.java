@@ -81,11 +81,23 @@ public class PlayerService {
         playerRepository.updatePlayer(team, pogPoint, playerId);
     }
 
+    // ------- api -------
+
+    // 한 팀의 선수 리스트 조회
     @Transactional(readOnly = true)
     public List<PlayerDto> findPlayerDtoOfTeamList(Long teamId) {
         List<Player> playersOfTeam = playerRepository.findPlayersOfTeam(teamId);
         return playersOfTeam.stream()
-                .map(player -> new PlayerDto(player))
+                .map(PlayerDto::new)
+                .collect(toList());
+    }
+
+    // 선수 리스트 조회
+    @Transactional
+    public List<PlayerDto> findPlayerDtoList() {
+        List<Player> players = playerRepository.findAll();
+        return players.stream()
+                .map(PlayerDto::new)
                 .collect(toList());
     }
 }
