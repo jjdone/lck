@@ -75,6 +75,7 @@ public class GameService {
                     .team2(resultList.get(i+1).getTeam())
                     .team1_point(resultList.get(i).getPoint())
                     .team2_point(resultList.get(i+1).getPoint())
+                    .startDate(resultList.get(i).getStartDate())
                     .build();
             gameList.add(gameScheduleDto);
         }
@@ -107,7 +108,7 @@ public class GameService {
                 .build();
     }
 
-    //경기 업데이트
+    //경기 점수 업데이트
     @Transactional
     public void updateGameTeam(Long gameId, GameTeamUpdateDto gameTeamUpdateDto) {
         Game findGame = gameRepository.findById(gameId).get();
@@ -119,5 +120,11 @@ public class GameService {
     @Transactional
     public void deleteGame(Long gameId) {
         gameRepository.deleteById(gameId);
+    }
+
+    @Transactional
+    public GameBeforeDto findMain() {
+        List<GameListDto> beforeGameList = gameRepository.findBeforeGameList(GameState.BEFORE_GAME);
+        return new GameBeforeDto(beforeGameList.get(0), beforeGameList.get(1));
     }
 }
