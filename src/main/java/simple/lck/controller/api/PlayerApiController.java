@@ -23,4 +23,10 @@ public class PlayerApiController {
         List<PlayerDto> playerDtoList = playerService.findPlayerDtoList();
         return ResponseEntity.ok(playerDtoList);
     }
+
+    @GetMapping("/{playerId}")
+    public ResponseEntity<?> playerDetails(@PathVariable Long playerId) {
+        PlayerDto playerDto = playerService.findPlayerDto(playerId);
+        return ResponseEntity.ok(playerDto);
+    }
 }
