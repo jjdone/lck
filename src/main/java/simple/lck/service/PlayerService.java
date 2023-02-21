@@ -100,4 +100,11 @@ public class PlayerService {
                 .map(PlayerDto::new)
                 .collect(toList());
     }
+
+    // 선수 상세 조회
+    @Transactional
+    public PlayerDto findPlayerDto(Long playerId) {
+        Player player = playerRepository.findById(playerId).get();
+        return new PlayerDto(player);
+    }
 }
