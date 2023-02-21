@@ -39,4 +39,10 @@ public class TeamApiController {
         List<PlayerDto> playerDtoOfTeamList = playerService.findPlayerDtoOfTeamList(teamId);
         return ResponseEntity.ok(playerDtoOfTeamList);
     }
+
+    @GetMapping("/rank")
+    public ResponseEntity<?> teamRankList() {
+        List<TeamDto> rank = teamService.findTeamDtoRank();
+        return ResponseEntity.ok(rank);
+    }
 }
