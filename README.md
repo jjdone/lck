@@ -4,6 +4,3 @@
 
 
 ![화면 캡처 2023-02-22 165634](https://user-images.githubusercontent.com/85011505/220557748-d7039714-f286-4f18-aca9-c094152c7d9d.png)
-
-
-https://user-images.githubusercontent.com/85011505/220557748-d7039714-f286-4f18-aca9-c094152c7d9d.png
