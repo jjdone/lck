@@ -29,4 +29,10 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             "where g.gameState = :gameState " +
             "order by d.startDate ")
     List<GameListDto> findBeforeGameList(@Param("gameState") GameState gameState);
+
+    @Query(value = "select new simple.lck.dto.game.GameListDto(g.id, g.gameState, d.round, d.season, t.team, t.point, d.startDate) " +
+            "from GameTeam t join t.game g join g.date d " +
+            "where g.gameState = :gameState " +
+            "order by d.startDate ")
+    List<GameListDto> findPlayingGameList(@Param("gameState") GameState gameState);
 }
