@@ -15,6 +15,8 @@ import simple.lck.repository.TeamRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import static simple.lck.configuration.GameState.*;
+
 @Service
 @RequiredArgsConstructor
 public class GameService {
@@ -127,7 +129,13 @@ public class GameService {
     // 메인(오늘의 경기) 정보 조회
     @Transactional
     public GameBeforeDto findMain() {
-        List<GameListDto> beforeGameList = gameRepository.findBeforeGameList(GameState.BEFORE_GAME);
+        List<GameListDto> playingGameList = gameRepository.findPlayingGameList(PLAYING);
+
+        if (!playingGameList.isEmpty()) {
+            return new GameBeforeDto(playingGameList.get(0), playingGameList.get(1));
+        }
+
+        List<GameListDto> beforeGameList = gameRepository.findBeforeGameList(BEFORE_GAME);
         return new GameBeforeDto(beforeGameList.get(0), beforeGameList.get(1));
     }
 
