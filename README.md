@@ -1,6 +1,6 @@
 # Simple LCK Info
 
-관리자 페이지:
+관리자 페이지 예시:
 
 <img width="730" alt="스크린샷 2023-02-27 오후 3 33 57" src="https://user-images.githubusercontent.com/85011505/221493776-36998918-3413-430f-abc2-95165c2731df.png">
 
