@@ -1,5 +1,11 @@
 # Simple LCK Info
 
+관리자 페이지:
+
+<img width="730" alt="스크린샷 2023-02-27 오후 3 33 57" src="https://user-images.githubusercontent.com/85011505/221493776-36998918-3413-430f-abc2-95165c2731df.png">
+
+<img width="1229" alt="스크린샷 2023-02-27 오후 3 48 11" src="https://user-images.githubusercontent.com/85011505/221493727-f6471e26-3058-4a00-be5a-ad6b25ce0e1f.png">
+
 1. 프로젝트 소개:
 
 본인 취미를 즐기며 백엔드 프로젝트 경험을 쌓고자 간단한 LCK 대회 정보를 알려주는 서비스(백엔드 부분)를 개발하게 되었다.
