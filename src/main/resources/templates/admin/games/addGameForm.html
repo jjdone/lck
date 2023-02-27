@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/addForm.css">
     <title>Add Game Form</title>
 </head>
 <body>
@@ -161,6 +162,8 @@
 
     <button type="submit">Add Game</button>
 </form>
+
+<button th:onclick="|location.href='@{/admin/games}'|">Game List</button>
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/addForm.css">
     <title>Add Team Form</title>
 </head>
 <body>
@@ -50,10 +51,8 @@
     </div>
     <button type="submit">Add Team</button>
 </form>
-<hr>
-<div>
-    <button th:onclick="|location.href='@{/admin/teams}'|">Team List</button>
-</div>
+
+<button th:onclick="|location.href='@{/admin/teams}'|">Team List</button>
 
 </body>
 </html>

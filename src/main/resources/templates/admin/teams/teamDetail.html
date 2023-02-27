@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/detailsForm.css">
     <title>Team Detail</title>
 </head>
 <body>
@@ -23,9 +24,6 @@
 <h2>Assistant Coaches</h2>
 
 <table>
-    <tr>
-        <th>Assistant Coach Name</th>
-    </tr>
     <tr th:each="assistantCoach : ${assistantCoaches}">
         <td th:text="${assistantCoach.name}"></td>
     </tr>

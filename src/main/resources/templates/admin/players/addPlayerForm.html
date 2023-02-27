@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/addForm.css">
   <title>Add Player Form</title>
 </head>
 <body>
@@ -40,9 +41,7 @@
     <label for="detailUrl">Detail URL: </label>
     <input type="text" id="detailUrl" th:field="*{detailUrl}" />
   </div>
-  <div>
-    <input type="submit" value="Add Player" />
-  </div>
+  <button type="submit">Add Player</button>
 </form>
 <hr>
 <div>
